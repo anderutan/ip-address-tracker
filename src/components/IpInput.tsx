@@ -16,7 +16,7 @@ const IpInput = ({ setIpAddress }: IpInputProps) => {
   };
 
   return (
-    <form className='w-full max-w-[400px]' onSubmit={handleSubmit}>
+    <form className='w-full max-w-[400px] mb-5' onSubmit={handleSubmit}>
       <div className='w-full flex'>
         {/* https://codesandbox.io/embed/react-text-mask-ip-kg27g */}
         <MaskedInput

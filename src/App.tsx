@@ -3,10 +3,11 @@ import IpInput from './components/IpInput';
 import Info from './components/Info';
 import mbBg from '../src/assets/pattern-bg-mobile.png';
 import API_KEY from './util/apikey';
+import { DataType } from './util/type';
 
 function App() {
   const [ipAddress, setIpAddress] = useState('');
-  const [ipInfo, setIpInfo] = useState([]);
+  const [ipInfo, setIpInfo] = useState<DataType>([]);
 
   const query = `https://api-bdc.net/data/ip-geolocation?ip=${ipAddress}&localityLanguage=en&key=${API_KEY}`;
 
@@ -17,7 +18,17 @@ function App() {
         throw new Error(`There is some error ${res.status}`);
       }
       const data = await res.json();
-      setIpInfo(data);
+      const filteredData: DataType[] = {
+        ip: data.ip,
+        flag: data.country.countryFlagEmoji,
+        city: data.location.city,
+        state: data.location.principalSubdivision,
+        timeZone: data.location.timeZone.displayName,
+        isp: data.network.carriers[0].organisation,
+        longitude: data.location.longitude,
+        latitude: data.location.latitude,
+      };
+      setIpInfo(filteredData);
     };
     fetchData();
   }, [ipAddress]);
@@ -36,7 +47,7 @@ function App() {
           IP Address Tracker
         </h1>
         <IpInput setIpAddress={setIpAddress} />
-        <Info />
+        <Info info={ipInfo} />
       </div>
       <div className=''>{/* show map */}</div>
     </div>
