@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react';
 import IpInput from './components/IpInput';
 import Info from './components/Info';
 import mbBg from '../src/assets/pattern-bg-mobile.png';
+import lgBg from '../src/assets/pattern-bg-desktop.png';
 import API_KEY from './util/apikey';
 import { type DataType } from './util/type';
 import ShowMap from './components/ShowMap';
+import useScreenSize from './util/useScreenSize';
 
 function App() {
   const [ipAddress, setIpAddress] = useState('');
   const [ipInfo, setIpInfo] = useState<DataType | null>('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
+  const { width } = useScreenSize();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,16 +58,16 @@ function App() {
   return (
     <>
       {ipInfo ? (
-        <div className='h-full flex flex-col'>
+        <div className='flex flex-col'>
           <div
-            className='h-1/3 p-5 flex flex-col items-center z-10'
+            className='p-5 flex flex-col items-center z-10 '
             style={{
-              backgroundImage: `url(${mbBg})`,
-              height: '350px',
+              backgroundImage: width > 640 ? `url(${lgBg})` : `url(${mbBg})`,
+              height: width > 640 ? '270px' : '350px',
               backgroundSize: 'cover',
             }}
           >
-            <h1 className='text-white font-medium text-2xl mb-5'>
+            <h1 className='text-white font-medium text-2xl mb-5 sm:text-3xl'>
               IP Address Tracker
             </h1>
             <IpInput setIpAddress={setIpAddress} />
