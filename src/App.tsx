@@ -10,9 +10,9 @@ import useScreenSize from './util/useScreenSize';
 
 function App() {
   const [ipAddress, setIpAddress] = useState('');
-  const [ipInfo, setIpInfo] = useState<DataType | null>('');
+  const [ipInfo, setIpInfo] = useState<DataType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(null);
+  const [isError, setIsError] = useState<string | null>(null);
   const { width } = useScreenSize();
 
   useEffect(() => {
