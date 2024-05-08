@@ -22,7 +22,7 @@ const IpInput = ({ setIpAddress }: IpInputProps) => {
         <MaskedInput
           {...ipAddressProps}
           onChange={(e) => setInput(e.target.value)}
-          className='py-3 pl-5 pr-2 rounded-l-xl w-full'
+          className='py-5 pl-5 pr-2 rounded-l-xl w-full text-lg'
         />
         <button
           type='submit'

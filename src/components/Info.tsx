@@ -1,4 +1,4 @@
-import { DataType } from '../util/type';
+import { type DataType } from './util/type';
 
 function extractUTCOffset(str: string): string {
   const regex = /\(UTC([+-]\d{2}:\d{2})\)/;
@@ -6,7 +6,7 @@ function extractUTCOffset(str: string): string {
   if (match && match[1]) {
     return 'UTC ' + match[1];
   } else {
-    return str; // Return null if no match found
+    return str;
   }
 }
 
@@ -15,7 +15,7 @@ const Info = ({ info }: DataType) => {
     'text-gray-400 font-semibold text-xs tracking-wider mb-1 text-center';
   const descriptionCSS = 'text-lg font-medium mb-4 text-center';
   return (
-    <div className='bg-gray-100 w-full py-5 rounded-lg flex flex-col items-center shadow-lg'>
+    <div className='bg-gray-100 w-full pt-4 rounded-lg flex flex-col items-center shadow-lg'>
       <div>
         <p className={titleCSS}>IP ADDRESS</p>
         <p className={descriptionCSS}>{info.ip}</p>
